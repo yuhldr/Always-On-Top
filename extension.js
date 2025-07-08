@@ -340,3 +340,27 @@ export default class OnTheTop extends Extension {
     }
 }
 
+// Compatibility functions for older GNOME Extensions validation
+let extension = null;
+
+function init() {
+    // Legacy compatibility function
+    return new OnTheTop();
+}
+
+function enable() {
+    // Legacy compatibility function
+    if (!extension) {
+        extension = new OnTheTop();
+    }
+    extension.enable();
+}
+
+function disable() {
+    // Legacy compatibility function
+    if (extension) {
+        extension.disable();
+        extension = null;
+    }
+}
+
