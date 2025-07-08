@@ -1,6 +1,6 @@
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
-import {ExtensionPreferences,gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import {ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 export default class OnTheTopPreferences extends ExtensionPreferences {
 //export default class OnTheTopPreferences{

@@ -41,7 +41,29 @@ Access settings via the extension preferences or right-click the panel button:
 
 ## Installation
 
-### Method 1: Download from GitHub (Recommended)
+### Method 1: Download from GitHub Releases (Recommended)
+
+1. **Download the latest release:**
+   - Go to [Releases](https://github.com/Siddharthh39/Always-On-Top/releases)
+   - Download `always-on-top-v*.zip` (the extension package)
+
+2. **Install the extension:**
+   ```bash
+   # Extract to extensions directory
+   unzip always-on-top-v*.zip
+   cp -r AlwaysOnTop@Siddharthh39.github.io ~/.local/share/gnome-shell/extensions/
+   ```
+
+3. **Restart GNOME Shell:**
+   - On **X11**: Press `Alt+F2`, type `r`, and press Enter
+   - On **Wayland**: Log out and log back in, or reboot your system
+
+4. **Enable the extension:**
+   ```bash
+   gnome-extensions enable AlwaysOnTop@Siddharthh39.github.io
+   ```
+
+### Method 2: Download from GitHub (Latest Development)
 
 1. **Download the extension:**
    ```bash
@@ -70,7 +92,7 @@ Access settings via the extension preferences or right-click the panel button:
    gnome-extensions enable AlwaysOnTop@Siddharthh39.github.io
    ```
 
-### Method 2: Clone Repository
+### Method 3: Clone Repository
 
 1. **Clone the repository:**
    ```bash
@@ -85,9 +107,9 @@ Access settings via the extension preferences or right-click the panel button:
 
 3. **Follow steps 3-5 from Method 1**
 
-### Method 3: Manual Installation Script
+### Method 4: Automated Installation Script
 
-Create and run this installation script:
+You can also use the provided installation script:
 
 ```bash
 #!/bin/bash

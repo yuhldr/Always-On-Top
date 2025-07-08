@@ -1,10 +1,22 @@
 # Compiled GSettings schemas
 schemas/gschemas.compiled
 
+# Extension packages and distributions
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+always-on-top-extension.zip
+extension-package/
+dist/
+build/
+releases/
+
 # Backup files
 *~
 *.bak
 *.orig
+*.backup
 
 # OS generated files
 .DS_Store
@@ -14,6 +26,7 @@ schemas/gschemas.compiled
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
 # IDE files
 .vscode/
@@ -21,20 +34,28 @@ Thumbs.db
 *.swp
 *.swo
 *~
+.project
+.classpath
+.settings/
 
 # Node.js (if ever used)
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+yarn.lock
 
 # Temporary files
 *.tmp
 *.temp
 /tmp/
+.temporary/
 
 # Logs
 *.log
+logs/
+*.log.*
 
 # Runtime data
 pids
@@ -42,19 +63,20 @@ pids
 *.seed
 *.pid.lock
 
-# Extension package files (if creating zip distributions)
-*.zip
-*.tar.gz
-
 # Local extension configuration (user-specific)
 local-settings.json
+user-settings.json
+*.local
 
 # Development symlinks
 extension-link
+symlink/
 
 # Test coverage
 coverage/
 .nyc_output/
+.coverage
+htmlcov/
 
 # Dependency directories
 node_modules/
@@ -62,6 +84,7 @@ jspm_packages/
 
 # Optional npm cache directory
 .npm
+.cache/
 
 # Optional eslint cache
 .eslintcache
@@ -72,3 +95,59 @@ jspm_packages/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Git and version control
+.gitignore.bak
+.git/
+.gitmodules
+
+# Documentation builds
+docs/_build/
+site/
+
+# Python (if used for build scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+
+# Ruby (if used for build scripts)
+*.gem
+*.rbc
+.bundle/
+.ruby-version
+
+# Archive files
+*.7z
+*.rar
+*.gz
+*.bz2
+*.xz
+
+# System files
+Thumbs.db
+ehthumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+# Windows
+*.exe
+*.msi
+*.msm
+*.msp
+
+# Generated documentation
+docs/build/
+doc/build/
+
+# Editor temporary files
+.#*
+\#*#
