@@ -1,0 +1,124 @@
+name: Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y glib2.0-dev
+
+    - name: Compile schemas
+      run: |
+        cd schemas
+        glib-compile-schemas .
+
+    - name: Create extension package
+      run: |
+        # Create a clean directory for the extension
+        mkdir -p extension-package
+        
+        # Copy necessary files
+        cp -r icons extension-package/
+        cp -r schemas extension-package/
+        cp extension.js extension-package/
+        cp prefs.js extension-package/
+        cp metadata.json extension-package/
+        cp settings.json extension-package/
+        cp settings.ui extension-package/
+        cp stylesheet.css extension-package/
+        cp LICENSE extension-package/
+        
+        # Create zip file
+        cd extension-package
+        zip -r ../AlwaysOnTop@Siddharthh39.github.io.zip .
+        cd ..
+
+    - name: Get version
+      id: get_version
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+        else
+          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_version.outputs.version }}
+        release_name: Always On Top ${{ steps.get_version.outputs.version }}
+        body: |
+          ## 🎉 Always On Top Extension ${{ steps.get_version.outputs.version }}
+          
+          ### 📥 Installation
+          
+          **Quick Install:**
+          ```bash
+          curl -fsSL https://raw.githubusercontent.com/Siddharthh39/Always-On-Top/main/install.sh | bash
+          ```
+          
+          **Manual Install:**
+          1. Download the `AlwaysOnTop@Siddharthh39.github.io.zip` file below
+          2. Extract it to `~/.local/share/gnome-shell/extensions/AlwaysOnTop@Siddharthh39.github.io/`
+          3. Restart GNOME Shell
+          4. Enable the extension: `gnome-extensions enable AlwaysOnTop@Siddharthh39.github.io`
+          
+          ### ✨ Features
+          - Toggle windows always-on-top with left click or keyboard shortcut
+          - Configurable keyboard shortcuts (default: Super+T)
+          - Window stickiness across workspaces
+          - Visual indicators for different window states
+          - Customizable panel position and ranking
+          
+          ### 🐛 Bug Reports
+          Please report any issues on the [Issues page](https://github.com/Siddharthh39/Always-On-Top/issues).
+          
+          ### 🙏 Support
+          If you find this extension useful, please ⭐ star the repository!
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./AlwaysOnTop@Siddharthh39.github.io.zip
+        asset_name: AlwaysOnTop@Siddharthh39.github.io.zip
+        asset_content_type: application/zip
+
+    - name: Upload Install Script
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./install.sh
+        asset_name: install.sh
+        asset_content_type: text/plain
