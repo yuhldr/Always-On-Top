@@ -1,13 +1,16 @@
 {
-  "name": "Always On Top",
-  "description": "Always on top button in the top bar with keyboard shortcuts and stickiness",
-  "uuid": "AlwaysOnTop@Siddharthh39.github.io",
-  "settings-schema": "org.gnome.shell.extensions.always-on-top",
-  "shell-version": [
-    "45",
-    "46",
-    "47"
-  ],
-  "url": "https://github.com/Siddharthh39/Always-On-Top",
-  "version": 1
+    "name": "Always On Top",
+    "description": "Always on top button in the top bar with keyboard shortcuts and stickiness",
+    "uuid": "AlwaysOnTop@Siddharthh39.github.io",
+    "settings-schema": "org.gnome.shell.extensions.always-on-top",
+    "shell-version": [
+        "45",
+        "46",
+        "47",
+        "48",
+        "49"
+    ],
+    "url": "https://github.com/Siddharthh39/Always-On-Top",
+    "version": 1,
+    "gettext-domain": "AlwaysOnTop"
 }
